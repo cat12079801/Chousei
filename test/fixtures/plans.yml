@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  cookie: MyString
+  password: MyString
+  title: MyString
+  explanation: MyText
+  hash: MyString
+  day_start: 2015-02-19
+  day_end: 2015-02-19
+  day_out: MyText
+  day_number: 
+  enable_time: false
+  time_start: 2015-02-19 16:42:43
+  time_end: 2015-02-19 16:42:43
+
+two:
+  cookie: MyString
+  password: MyString
+  title: MyString
+  explanation: MyText
+  hash: MyString
+  day_start: 2015-02-19
+  day_end: 2015-02-19
+  day_out: MyText
+  day_number: 
+  enable_time: false
+  time_start: 2015-02-19 16:42:43
+  time_end: 2015-02-19 16:42:43
