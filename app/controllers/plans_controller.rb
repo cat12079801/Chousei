@@ -15,6 +15,7 @@ class PlansController < ApplicationController
   # GET /plans/new
   def new
     @plan = Plan.new
+    @hoge = Date.today.to_s.gsub("-", "")
   end
 
   # GET /plans/1/edit
@@ -25,6 +26,19 @@ class PlansController < ApplicationController
   # POST /plans.json
   def create
     @plan = Plan.new(plan_params)
+
+    # ActiveSupport のおかげ
+    @plan.day_number = (@plan.day_end - @plan.day_start).to_i + 1
+
+    today = Date.today.to_s.gsub("-", "")
+    begin
+      # random_string はユーザ定義関数
+      s = random_string(10)
+      @plan.original_url = today + "_" + s
+    end
+    @plan.cookie = random_string(20)
+    cookies[@plan.original_url.to_sym] = {:value => @plan.cookie}
+
 
     respond_to do |format|
       if @plan.save
@@ -69,6 +83,10 @@ class PlansController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def plan_params
-      params[:plan]
+      params[:plan].permit(:password, :title, :explanation, :day_start, :day_end, :day_out, :enable_time, :time_start, :time_end)
+    end
+
+    def random_string(i)
+      ((0..9).to_a + ("a".."z").to_a + ("A".."Z").to_a).sample(i).join
     end
 end
