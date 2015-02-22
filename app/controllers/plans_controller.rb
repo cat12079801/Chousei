@@ -16,7 +16,6 @@ class PlansController < ApplicationController
   # GET /plans/new
   def new
     @plan = Plan.new
-    @hoge = Date.today.to_s.gsub("-", "")
   end
 
   # GET /plans/1/edit
