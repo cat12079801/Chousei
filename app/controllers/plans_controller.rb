@@ -11,6 +11,7 @@ class PlansController < ApplicationController
   # GET /plans/1.json
   def show
     @plan = Plan.find(params[:id])
+    @opinion = Opinion.new
   end
 
   # GET /plans/new
@@ -73,6 +74,21 @@ class PlansController < ApplicationController
       format.html { redirect_to plans_url, notice: 'Plan was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def edit_opinion
+  end
+
+  def create_opinion
+    redirect_to :action => 'show', :id => params[:id]
+  end
+
+  def update_opinion
+    redirect_to :action => 'show', :id => params[:id]
+  end
+
+  def destroy_opinion
+    redirect_to :action => 'show', :id => params[:id]
   end
 
   private
