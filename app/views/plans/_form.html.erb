@@ -1,0 +1,56 @@
+<%= form_for(@plan) do |f| %>
+  <% if @plan.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@plan.errors.count, "error") %> prohibited this plan from being saved:</h2>
+
+      <ul>
+      <% @plan.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <p>パスワード</p>
+    <%= f.password_field :password %>
+  </div>
+  <div>
+    <p>タイトル</p>
+    <%= f.text_field :title %>
+  </div>
+  <div>
+    <p>説明</p>
+    <%= f.text_area :explanation %>
+  </div>
+  <div>
+    <p>開始日</p>
+    <%= f.date_field :day_start %>
+  </div>
+  <div>
+    <p>終了日</p>
+    <%= f.date_field :day_end %>
+  </div>
+  <!--
+  <div>
+    <p>はずす日</p>
+    <%= f.text_field :day_out %>
+  </div>
+  -->
+  <div>
+    <p>時間で分けるか</p>
+    <%= f.check_box :enable_time %>
+  </div>
+  <div>
+    <p>開始時間</p>
+    <%= f.time_select :time_start %>
+  </div>
+  <div>
+    <p>終了時間</p>
+    <%= f.time_select :time_end %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

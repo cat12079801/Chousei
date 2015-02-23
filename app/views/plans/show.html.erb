@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<h1><%= @plan.title %></h1>
+<h3><%= @plan.explanation %></h3>
+
+<table>
+  <tr>
+    <th>hoge</th>
+    <th>誰か</th>
+  </tr>
+  <% for i in 0..@plan.day_number - 1 do %>
+    <tr>
+      <td><%= @plan.day_start + i %></td>
+      <td>piyo</td>
+    </tr>
+  <% end %>
+</table>
+
+<%= link_to 'Edit', edit_plan_path(@plan) %> |
+<%= link_to 'Back', plans_path %>

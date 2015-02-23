@@ -11,6 +11,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20150221032410) do
+
+  create_table "opinions", force: :cascade do |t|
+    t.integer  "plan_id",    limit: 4,     null: false
+    t.string   "cookie",     limit: 255,   null: false
+    t.string   "password",   limit: 255
+    t.string   "name",       limit: 255,   null: false
+    t.text     "opinion",    limit: 65535, null: false
+    t.text     "note",       limit: 65535
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  create_table "plans", force: :cascade do |t|
+    t.string   "cookie",       limit: 255,   null: false
+    t.string   "password",     limit: 255
+    t.string   "title",        limit: 255,   null: false
+    t.text     "explanation",  limit: 65535
+    t.string   "original_url", limit: 255,   null: false
+    t.date     "day_start",                  null: false
+    t.date     "day_end",                    null: false
+    t.text     "day_out",      limit: 65535
+    t.integer  "day_number",   limit: 4,     null: false
+    t.boolean  "enable_time",  limit: 1,     null: false
+    t.time     "time_start"
+    t.time     "time_end"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
 
 end
