@@ -80,6 +80,18 @@ class PlansController < ApplicationController
   end
 
   def create_opinion
+    @opinion = Opinion.new
+    # params
+    @opinion.name = params[:opinion][:name]
+    @opinion.password = params[:opinion][:password]
+    @opinion.opinion = params[:opinion][:opinion]
+    @opinion.note = params[:opinion][:note]
+
+    @opinion.plan_id = params[:id]
+    @opinion.cookie = random_string(20)
+    @opinion.save
+    cookies[(Plan.find(params[:id]).original_url + "_" + @opinion.id.to_s).to_sym] = {:value => @opinion.cookie}
+
     redirect_to :action => 'show', :id => params[:id]
   end
 
