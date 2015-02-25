@@ -26,6 +26,21 @@
   <div>
     <%= f.hidden_field :opinion %>
   </div>
+  <div>
+    <p>予定</p>
+    <table>
+      <tr>
+        <th>日程</th>
+        <th>どうすんのよ</th>
+      </tr>
+      <% for i in 0..@plan.day_number - 1 do %>
+        <tr>
+          <td class="days"><%= @plan.day_start + i %></td>
+          <td id="<%== @plan.day_start + i %>" class="post_plan"></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
 
   <div class="actions">
     <%= f.submit %>
