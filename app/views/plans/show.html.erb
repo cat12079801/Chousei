@@ -16,9 +16,8 @@
     <tr>
       <td><%= @plan.day_start + i %></td>
       <% if !@opinions.nil? %>
-        <% for i in 0..@opinions.length - 1 do %>
-          <!-- ここに個人の予定出力 -->
-          <td>piyo</td>
+        <% for j in 0..@opinions.length - 1 do %>
+          <td class="<%= @detail_opinions[j][(@plan.day_start + i).to_s] %>"></td>
         <% end %>
       <% end %>
     </tr>

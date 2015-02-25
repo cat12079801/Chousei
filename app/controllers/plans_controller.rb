@@ -12,6 +12,12 @@ class PlansController < ApplicationController
   def show
     @plan = Plan.find(params[:id])
     @opinions = Opinion.where("plan_id = ?", params[:id].to_i)
+    if !@opinions.nil?
+      @detail_opinions = Array.new
+      for i in 0..@opinions.length - 1 do
+        @detail_opinions[i] = JSON.parse(@opinions[i].opinion)
+      end
+    end
     @opinion = Opinion.new
   end
 
