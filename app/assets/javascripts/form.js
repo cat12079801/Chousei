@@ -3,12 +3,10 @@ $(function(){
   var i = 0;
   while($("td.post_plan:eq(" + i + ")").attr("id") !== undefined){
     $("td.post_plan:eq(" + i + ")").addClass("muri");
-    console.log($("td.post_plan:eq(" + i + ")").attr("id"));
     opinion_obj[$("td.post_plan:eq(" + i + ")").attr("id")] = "muri";
     i++;
   }
   $("#opinion_opinion").val(JSON.stringify(opinion_obj));
-  console.log($("#opinion_opinion").val());
   $("#muri.selectable").addClass("selected");
 
   $(".selectable").click(function(){
@@ -32,6 +30,5 @@ $(function(){
         break;
     }
     $("#opinion_opinion").val(JSON.stringify(opinion_obj));
-    console.log($("#opinion_opinion").val());
   });
 });
