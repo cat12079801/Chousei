@@ -5,13 +5,22 @@
 
 <table>
   <tr>
-    <th>hoge</th>
-    <th>誰か</th>
+    <th>日程</th>
+    <% if !@opinions.nil? %>
+      <% for i in 0..@opinions.length - 1 do %>
+        <th><%= @opinions[i].name %></th>
+      <% end %>
+    <% end %>
   </tr>
   <% for i in 0..@plan.day_number - 1 do %>
     <tr>
       <td><%= @plan.day_start + i %></td>
-      <td>piyo</td>
+      <% if !@opinions.nil? %>
+        <% for i in 0..@opinions.length - 1 do %>
+          <!-- ここに個人の予定出力 -->
+          <td>piyo</td>
+        <% end %>
+      <% end %>
     </tr>
   <% end %>
 </table>

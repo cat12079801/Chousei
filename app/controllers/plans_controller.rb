@@ -11,6 +11,7 @@ class PlansController < ApplicationController
   # GET /plans/1.json
   def show
     @plan = Plan.find(params[:id])
+    @opinions = Opinion.where("plan_id = ?", params[:id].to_i)
     @opinion = Opinion.new
   end
 
