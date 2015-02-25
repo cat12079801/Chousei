@@ -29,6 +29,8 @@ class PlansController < ApplicationController
   def create
     @plan = Plan.new(plan_params)
 
+    @plan.password = Digest::SHA256.hexdigest @plan.password
+
     # ActiveSupport のおかげ
     @plan.day_number = (@plan.day_end - @plan.day_start).to_i + 1
 
@@ -84,7 +86,7 @@ class PlansController < ApplicationController
     @opinion = Opinion.new
     # params
     @opinion.name = params[:opinion][:name]
-    @opinion.password = params[:opinion][:password]
+    @opinion.password = Digest::SHA256.hexdigest params[:opinion][:password]
     @opinion.opinion = params[:opinion][:opinion]
     @opinion.note = params[:opinion][:note]
 
