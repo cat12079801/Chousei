@@ -1,0 +1,24 @@
+.selectable {
+  margin: 10px;
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  border: solid;
+  border-color: rgba(46, 46, 46, 0);
+}
+
+.selectable.selected {
+  border-color: rgba(46, 46, 46, 1);
+}
+
+#ikeru, .ikeru {
+  background-color: #81F781
+}
+
+#mitei, .mitei {
+  background-color: #F4FA58
+}
+
+#muri, .muri {
+  background-color: #A4A4A4
+}

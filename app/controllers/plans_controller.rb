@@ -11,6 +11,14 @@ class PlansController < ApplicationController
   # GET /plans/1.json
   def show
     @plan = Plan.find(params[:id])
+    @opinions = Opinion.where("plan_id = ?", params[:id].to_i)
+    if !@opinions.nil?
+      @detail_opinions = Array.new
+      for i in 0..@opinions.length - 1 do
+        @detail_opinions[i] = JSON.parse(@opinions[i].opinion)
+      end
+    end
+    @opinion = Opinion.new
   end
 
   # GET /plans/new
@@ -26,6 +34,8 @@ class PlansController < ApplicationController
   # POST /plans.json
   def create
     @plan = Plan.new(plan_params)
+
+    @plan.password = Digest::SHA256.hexdigest @plan.password
 
     # ActiveSupport のおかげ
     @plan.day_number = (@plan.day_end - @plan.day_start).to_i + 1
@@ -73,6 +83,33 @@ class PlansController < ApplicationController
       format.html { redirect_to plans_url, notice: 'Plan was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def edit_opinion
+  end
+
+  def create_opinion
+    @opinion = Opinion.new
+    # params
+    @opinion.name = params[:opinion][:name]
+    @opinion.password = Digest::SHA256.hexdigest params[:opinion][:password]
+    @opinion.opinion = params[:opinion][:opinion]
+    @opinion.note = params[:opinion][:note]
+
+    @opinion.plan_id = params[:id]
+    @opinion.cookie = random_string(20)
+    @opinion.save
+    cookies[(Plan.find(params[:id]).original_url + "_" + @opinion.id.to_s).to_sym] = {:value => @opinion.cookie}
+
+    redirect_to :action => 'show', :id => params[:id]
+  end
+
+  def update_opinion
+    redirect_to :action => 'show', :id => params[:id]
+  end
+
+  def destroy_opinion
+    redirect_to :action => 'show', :id => params[:id]
   end
 
   private
