@@ -109,6 +109,7 @@ class PlansController < ApplicationController
   end
 
   def destroy_opinion
+    Opinion.destroy(params[:opinion_id])
     redirect_to :action => 'show', :id => params[:id]
   end
 
