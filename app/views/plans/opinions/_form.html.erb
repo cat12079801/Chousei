@@ -1,4 +1,4 @@
-<%= form_for @opinion, :url => {:action => 'create_opinion'} do |f| %>
+<%= form_for([@plan, @opinion]) do |f| %>
   <% if @opinion.errors.any? %>
     <div id="error_exopinionation">
       <h2><%= pluralize(@opinion.errors.count, "error") %> prohibited this opinion from being saved:</h2>

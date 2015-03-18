@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :plans do
-    resources :opinions, :only => [:new, :edit, :create, :destroy], :module => :plans
+    resources :opinions, :only => [:new, :edit, :create, :update, :destroy], :module => :plans
   end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

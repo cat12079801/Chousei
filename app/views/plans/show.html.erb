@@ -13,26 +13,33 @@
     <% end %>
   </tr>
   <% for i in 0..@plan.day_number - 1 do %>
-    <tr>
-      <td><%= @plan.day_start + i %></td>
-      <% if !@opinions.nil? %>
-        <% for j in 0..@opinions.length - 1 do %>
-          <td class="<%= @detail_opinions[j][(@plan.day_start + i).to_s] %>"></td>
-        <% end %>
+  <tr>
+    <td><%= @plan.day_start + i %></td>
+    <% if !@opinions.nil? %>
+      <% for j in 0..@opinions.length - 1 do %>
+        <td class="<%= @detail_opinions[j][(@plan.day_start + i).to_s] %>"></td>
       <% end %>
-    </tr>
+    <% end %>
+  </tr>
   <% end %>
   <tr>
-    <tr>
-      <td></td>
-      <% if !@opinions.nil? %>
-        <% for j in 0..@opinions.length - 1 do %>
-          <td><%= link_to "delete", plan_opinion_path(@plan, @opinions[j]), :method => :delete, data: {confirm: "ok?"} %></td>
-        <% end %>
+    <td></td>
+    <% if !@opinions.nil? %>
+      <% for j in 0..@opinions.length - 1 do %>
+        <td><%= link_to "edit", edit_plan_opinion_path(@plan, @opinions[j]) %></td>
       <% end %>
-    </tr>
+    <% end %>
+  </tr>
+  <tr>
+    <td></td>
+    <% if !@opinions.nil? %>
+      <% for j in 0..@opinions.length - 1 do %>
+        <td><%= link_to "delete", plan_opinion_path(@plan, @opinions[j]), :method => :delete, data: {confirm: "ok?"} %></td>
+      <% end %>
+    <% end %>
   </tr>
 </table>
 
 <%= link_to 'Edit', edit_plan_path(@plan) %> |
-<%= link_to 'Back', plans_path %>
+<%= link_to 'Back', plans_path %> |
+<%= link_to 'New opinion', new_plan_opinion_path(@plan) %>

@@ -1,28 +1,28 @@
 class Plans::OpinionsController < ApplicationController
 
   def new
+    @opinion = Opinion.new
+    @plan = Plan.find(params[:plan_id])
   end
 
   def edit
+    @opinion = Opinion.find(params[:id])
+    @plan = Plan.find(params[:plan_id])
   end
 
   def create
-    @opinion = Opinion.new
-    # params
-    @opinion.name = params[:opinion][:name]
-    @opinion.password = Digest::SHA256.hexdigest params[:opinion][:password]
-    @opinion.opinion = params[:opinion][:opinion]
-    @opinion.note = params[:opinion][:note]
-
-    @opinion.plan_id = params[:id]
+    @opinion = Opinion.new(params_confirm)
+    @opinion.plan_id = params[:plan_id]
     @opinion.cookie = random_string(20)
     @opinion.save
-    cookies[(Plan.find(params[:id]).original_url + "_" + @opinion.id.to_s).to_sym] = {:value => @opinion.cookie}
+    cookies[(Plan.find(params[:plan_id]).original_url + "_" + @opinion.id.to_s).to_sym] = {:value => @opinion.cookie}
 
     redirect_to plan_path(params[:plan_id])
   end
 
   def update
+    @opinion = Opinion.find(params[:id])
+    @opinion.update(params_confirm)
     redirect_to plan_path(params[:plan_id])
   end
 
@@ -36,8 +36,8 @@ class Plans::OpinionsController < ApplicationController
       @opinion = Opinion.find(params[:id])
     end
 
-    def opinion_params
-      #params[:opinion].permit(:password, :title, :explanation, :day_start, :day_end, :day_out, :enable_time, :time_start, :time_end)
+    def params_confirm
+      params[:opinion].permit(:password, :name, :note, :opinion)
     end
 
     def random_string(i)
