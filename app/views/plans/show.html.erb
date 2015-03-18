@@ -27,7 +27,7 @@
       <td></td>
       <% if !@opinions.nil? %>
         <% for j in 0..@opinions.length - 1 do %>
-          <td><%= link_to "delete", destroy_opinion_plan_path(@plan, opinion_id: @opinions[j].id), :method => :delete, data: {confirm: "ok?"} %></td>
+          <td><%= link_to "delete", plan_opinion_path(@plan, @opinions[j]), :method => :delete, data: {confirm: "ok?"} %></td>
         <% end %>
       <% end %>
     </tr>
@@ -36,5 +36,3 @@
 
 <%= link_to 'Edit', edit_plan_path(@plan) %> |
 <%= link_to 'Back', plans_path %>
-
-<%= render 'form_opinion' %>

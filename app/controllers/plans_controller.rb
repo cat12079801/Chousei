@@ -85,34 +85,6 @@ class PlansController < ApplicationController
     end
   end
 
-  def edit_opinion
-  end
-
-  def create_opinion
-    @opinion = Opinion.new
-    # params
-    @opinion.name = params[:opinion][:name]
-    @opinion.password = Digest::SHA256.hexdigest params[:opinion][:password]
-    @opinion.opinion = params[:opinion][:opinion]
-    @opinion.note = params[:opinion][:note]
-
-    @opinion.plan_id = params[:id]
-    @opinion.cookie = random_string(20)
-    @opinion.save
-    cookies[(Plan.find(params[:id]).original_url + "_" + @opinion.id.to_s).to_sym] = {:value => @opinion.cookie}
-
-    redirect_to :action => 'show', :id => params[:id]
-  end
-
-  def update_opinion
-    redirect_to :action => 'show', :id => params[:id]
-  end
-
-  def destroy_opinion
-    Opinion.destroy(params[:opinion_id])
-    redirect_to :action => 'show', :id => params[:id]
-  end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_plan
