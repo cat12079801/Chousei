@@ -7,7 +7,7 @@ class Plans::OpinionsController < ApplicationController
 
   def edit
     @opinion = Opinion.find(params[:id])
-    @plan = Plan.find(params[:plan_id])
+    @plan = Plan.find_by_original_url(params[:plan_original_url])
   end
 
   def create

@@ -10,8 +10,8 @@ class PlansController < ApplicationController
   # GET /plans/1
   # GET /plans/1.json
   def show
-    @plan = Plan.find(params[:id])
-    @opinions = Opinion.where("plan_id = ?", params[:id].to_i)
+    #@opinions = Opinion.where("plan_id = ?", params[:id].to_i)
+    @opinions = Opinion.where(:plan_id => Plan.find_by_original_url(params[:original_url]).id)
     if !@opinions.nil?
       @detail_opinions = Array.new
       for i in 0..@opinions.length - 1 do
@@ -88,7 +88,9 @@ class PlansController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_plan
-      @plan = Plan.find(params[:id])
+      #@plan = Plan.find(params[:id])
+      #@plan = Plan.find(:original_url => params[:original_url)
+      @plan = Plan.find_by_original_url(params[:original_url])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

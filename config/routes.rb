@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :plans do
+  resources :plans, :param => :original_url, :constraints => {:original_url => /[0-9]{8}_[0-9a-zA-Z]{10}/} do
     resources :opinions, :only => [:new, :edit, :create, :update, :destroy], :module => :plans
   end
   # The priority is based upon order of creation: first created -> highest priority.
