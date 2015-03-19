@@ -1,14 +1,24 @@
 $(function(){
   // ロード時に予定を入れるオブジェクトを用意したり(初期値は"むり")
   var opinion_obj = {};
-  var i = 0;
-  while($("td.post_plan:eq(" + i + ")").attr("id") !== undefined){
-    $("td.post_plan:eq(" + i + ")").addClass("muri");
-    opinion_obj[$("td.post_plan:eq(" + i + ")").attr("id")] = "muri";
-    i++;
+  if($("#opinion_opinion").val() != ""){
+    opinion_obj = JSON.parse($("#opinion_opinion").val());
   }
-  // jsonで扱っているオブジェクトを文字列に変換してフォームに入れる
-  $("#opinion_opinion").val(JSON.stringify(opinion_obj));
+  var i = 0;
+  if(opinion_obj == {}){
+    while($("td.post_plan:eq(" + i + ")").attr("id") !== undefined){
+      $("td.post_plan:eq(" + i + ")").addClass("muri");
+      opinion_obj[$("td.post_plan:eq(" + i + ")").attr("id")] = "muri";
+      i++;
+    }
+    // jsonで扱っているオブジェクトを文字列に変換してフォームに入れる
+    $("#opinion_opinion").val(JSON.stringify(opinion_obj));
+  }else{
+    while($("td.post_plan:eq(" + i + ")").attr("id") !== undefined){
+      $("td.post_plan:eq(" + i + ")").addClass(opinion_obj[$("td.post_plan:eq(" + i + ")").attr("id")]);
+      i++;
+    }
+  }
   $("#muri.selectable").addClass("selected");
 
   // "行ける", "未定", "むり"の選択切り替え
