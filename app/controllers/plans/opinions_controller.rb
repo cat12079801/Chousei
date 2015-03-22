@@ -1,7 +1,7 @@
 class Plans::OpinionsController < ApplicationController
 
   def new
-    binding.pry
+    #binding.pry
     @opinion = Opinion.new
     @plan = Plan.find_by_original_url(params[:plan_original_url])
   end
@@ -13,12 +13,12 @@ class Plans::OpinionsController < ApplicationController
 
   def create
     @opinion = Opinion.new(params_confirm)
-    @opinion.plan_id = params[:plan_id]
+    @opinion.plan_id = Plan.find_by_original_url(params[:plan_original_url]).id
     @opinion.cookie = random_string(20)
     @opinion.save
-    cookies[(Plan.find(params[:plan_id]).original_url + "_" + @opinion.id.to_s).to_sym] = {:value => @opinion.cookie}
+    cookies[(Plan.find(@opinion.plan_id).original_url + "_" + @opinion.id.to_s).to_sym] = {:value => @opinion.cookie}
 
-    redirect_to plan_path(params[:plan_id])
+    redirect_to plan_path(params[:plan_original_url])
   end
 
   def update
