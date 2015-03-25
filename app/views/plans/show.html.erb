@@ -26,7 +26,7 @@
     <td></td>
     <% if !@opinions.nil? %>
       <% for j in 0..@opinions.length - 1 do %>
-        <td><%= link_to "edit", edit_plan_opinion_path(@plan, @opinions[j]) %></td>
+        <td><%= link_to "edit", edit_plan_opinion_path(@plan.original_url, @opinions[j]) %></td>
       <% end %>
     <% end %>
   </tr>
@@ -34,12 +34,12 @@
     <td></td>
     <% if !@opinions.nil? %>
       <% for j in 0..@opinions.length - 1 do %>
-        <td><%= link_to "delete", plan_opinion_path(@plan, @opinions[j]), :method => :delete, data: {confirm: "ok?"} %></td>
+        <td><%= link_to "delete", plan_opinion_path(@plan.original_url, @opinions[j]), :method => :delete, data: {confirm: "ok?"} %></td>
       <% end %>
     <% end %>
   </tr>
 </table>
 
-<%= link_to 'Edit', edit_plan_path(@plan) %> |
+<%= link_to 'Edit', edit_plan_path(@plan.original_url) %> |
 <%= link_to 'Back', plans_path %> |
-<%= link_to 'New opinion', new_plan_opinion_path(@plan) %>
+<%= link_to 'New opinion', new_plan_opinion_path(@plan.original_url) %>
