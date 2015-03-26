@@ -12,9 +12,9 @@
   <tbody>
     <% @plans.each do |plan| %>
       <tr>
-        <td><%= link_to 'Show', plan %></td>
-        <td><%= link_to 'Edit', edit_plan_path(plan) %></td>
-        <td><%= link_to 'Destroy', plan, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', plan_path(plan.original_url) %></td>
+        <td><%= link_to 'Edit', edit_plan_path(plan.original_url) %></td>
+        <td><%= link_to 'Destroy', plan_path(plan.original_url), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

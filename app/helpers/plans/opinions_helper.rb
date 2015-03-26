@@ -1,0 +1,2 @@
+module Plans::OpinionsHelper
+end

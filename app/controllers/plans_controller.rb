@@ -1,5 +1,5 @@
 class PlansController < ApplicationController
-  before_action :set_plan, only: [:show, :edit, :update, :destroy]
+  before_action :set_plan, only: [:show, :edit, :destroy]
 
   # GET /plans
   # GET /plans.json
@@ -10,8 +10,7 @@ class PlansController < ApplicationController
   # GET /plans/1
   # GET /plans/1.json
   def show
-    @plan = Plan.find(params[:id])
-    @opinions = Opinion.where("plan_id = ?", params[:id].to_i)
+    @opinions = Opinion.where("plan_id = ?", @plan.id)
     if !@opinions.nil?
       @detail_opinions = Array.new
       for i in 0..@opinions.length - 1 do
@@ -52,7 +51,7 @@ class PlansController < ApplicationController
 
     respond_to do |format|
       if @plan.save
-        format.html { redirect_to @plan, notice: 'Plan was successfully created.' }
+        format.html { redirect_to plan_path(@plan.original_url), notice: 'Plan was successfully created.' }
         format.json { render :show, status: :created, location: @plan }
       else
         format.html { render :new }
@@ -64,9 +63,10 @@ class PlansController < ApplicationController
   # PATCH/PUT /plans/1
   # PATCH/PUT /plans/1.json
   def update
+    @plan = Plan.find(params[:original_url])
     respond_to do |format|
       if @plan.update(plan_params)
-        format.html { redirect_to @plan, notice: 'Plan was successfully updated.' }
+        format.html { redirect_to plan_path(@plan.original_url), notice: 'Plan was successfully updated.' }
         format.json { render :show, status: :ok, location: @plan }
       else
         format.html { render :edit }
@@ -85,38 +85,10 @@ class PlansController < ApplicationController
     end
   end
 
-  def edit_opinion
-  end
-
-  def create_opinion
-    @opinion = Opinion.new
-    # params
-    @opinion.name = params[:opinion][:name]
-    @opinion.password = Digest::SHA256.hexdigest params[:opinion][:password]
-    @opinion.opinion = params[:opinion][:opinion]
-    @opinion.note = params[:opinion][:note]
-
-    @opinion.plan_id = params[:id]
-    @opinion.cookie = random_string(20)
-    @opinion.save
-    cookies[(Plan.find(params[:id]).original_url + "_" + @opinion.id.to_s).to_sym] = {:value => @opinion.cookie}
-
-    redirect_to :action => 'show', :id => params[:id]
-  end
-
-  def update_opinion
-    redirect_to :action => 'show', :id => params[:id]
-  end
-
-  def destroy_opinion
-    Opinion.destroy(params[:opinion_id])
-    redirect_to :action => 'show', :id => params[:id]
-  end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_plan
-      @plan = Plan.find(params[:id])
+      @plan = Plan.find_by_original_url(params[:original_url])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

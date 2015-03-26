@@ -1,14 +1,39 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>Chousei</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<%= yield %>
+    <title><%= content_for?(:title) ? yield(:title) : "foundation-rails" %></title>
 
-</body>
+    <%= stylesheet_link_tag    "application" %>
+    <%= javascript_include_tag "vendor/modernizr" %>
+    <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+  </head>
+
+  <body>
+    <nav class="top-bar">
+      <ul class="title-area">
+        <li class="name">
+          <h1><%= link_to "調整ちゃん", plans_path %></h1>
+        </li>
+      </ul>
+      <section class="top-bar-section">
+        <ul class="right">
+          <li class="divider"></li>
+          <li><%= link_to "主催した予定" %></li>
+          <li class="divider"></li>
+          <li><%= link_to "参加した予定" %></li>
+          <li class="divider"></li>
+          <li><%= link_to "このアプリについて" %></li>
+        </ul>
+      </section>
+    </nav>
+    <div class="row">
+      <div class="large-6 columns">
+      <%= yield %>
+      </div>
+    </div>
+  </body>
 </html>
