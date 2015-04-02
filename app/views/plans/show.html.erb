@@ -40,6 +40,6 @@
   </tr>
 </table>
 
-<%= link_to 'Edit', edit_plan_path(@plan.original_url) %> |
-<%= link_to 'Back', plans_path %> |
-<%= link_to 'New opinion', new_plan_opinion_path(@plan.original_url) %>
+<%= link_to 'Edit', edit_plan_path(@plan.original_url), {:class => "button tiny radius"} %> 
+<%= link_to 'Back', plans_path, {:class => "button tiny radius secondary"} %> 
+<%= link_to 'New opinion', new_plan_opinion_path(@plan.original_url), {:class => "button tiny radius success"} %>
