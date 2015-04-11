@@ -13,9 +13,9 @@
     <% @plans.each do |plan| %>
       <tr>
         <td><%= plan.title %></td>
-        <td><%= link_to 'Show', plan_path(plan.original_url) %></td>
-        <td><%= link_to 'Edit', edit_plan_path(plan.original_url) %></td>
-        <td><%= link_to 'Destroy', plan_path(plan.original_url), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to plan_path(plan.original_url) do %><paper-icon-button icon="search"></paper-icon-button><% end %></td>
+        <td><%= link_to edit_plan_path(plan.original_url) do %><paper-icon-button icon="create" style="color: #43A047"></paper-icon-button><% end %></td>
+        <td><%= link_to plan_path(plan.original_url), method: :delete, data: { confirm: 'Are you sure?' } do %><paper-icon-button icon="block" style="color: #E53935"></paper-icon-button><% end %></td>
       </tr>
     <% end %>
   </tbody>
