@@ -11,6 +11,7 @@
     </div>
   <% end %>
 
+  <div style="display: none">
   <div>
     <p>パスワード</p>
     <%= f.password_field :password %>
@@ -53,4 +54,41 @@
   <div class="actions">
     <%= f.submit %>
   </div>
+  </div>
 <% end %>
+
+<% if controller.action_name == 'new' %>
+<form action="<%= plans_url %>" method="POST">
+<% else %>
+<form action="<%= plan_url(@plan) %>" method="PUT">
+<% end %>
+  <input name="authenticity_token" type="hidden">
+
+  <paper-input-decorator floatingLabel label="title">
+    <input is="core-input" type="text" name="plan[title]"></input>
+  </paper-input-decorator>
+
+  <paper-input-decorator floatingLabel label="password">
+    <input is="core-input" type="password" name="plan[password]"></input>
+  </paper-input-decorator>
+
+  <paper-input-decorator floatingLabel label="explanation">
+    <input is="core-input" type="text" name="plan[explanation]"></input>
+  </paper-input-decorator>
+
+  <paper-input-decorator>
+    <label style="color: #aaa; font-size: 0.75em;">start day</label>
+    <input is="core-input" type="date" name="plan[day_start]"></input>
+  </paper-input-decorator>
+
+  <paper-input-decorator>
+    <label style="color: #aaa; font-size: 0.75em;">end day</label>
+    <input is="core-input" type="date" name="plan[day_end]"></input>
+  </paper-input-decorator>
+
+  <input type="hidden" name="plan[enable_time]" value="0"></input>
+  <input id="enable_time" type="checkbox" name="plan[enable_time]" value="1" style="display: none"></input>
+  <label for="enable_time" is="input-checkbox" label="enable time(現状無意味)" style="display: block"></label>
+
+  <button is="submit-button" style="color: #388E3C; padding: none;">Submit</button>
+</form>

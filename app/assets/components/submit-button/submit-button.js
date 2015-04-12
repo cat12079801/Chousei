@@ -1,0 +1,3 @@
+Polymer('submit-button', {
+
+});

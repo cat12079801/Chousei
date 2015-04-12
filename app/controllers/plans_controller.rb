@@ -10,6 +10,7 @@ class PlansController < ApplicationController
   # GET /plans/1
   # GET /plans/1.json
   def show
+    @plan = Plan.find_by_original_url(@params[:original_url])
     @opinions = Opinion.where("plan_id = ?", @plan.id)
     if !@opinions.nil?
       @detail_opinions = Array.new

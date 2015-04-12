@@ -1,0 +1,3 @@
+Polymer('input-checkbox', {
+
+});
