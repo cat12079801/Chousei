@@ -11,56 +11,10 @@
     </div>
   <% end %>
 
-  <div style="display: none">
-  <div>
-    <p>パスワード</p>
-    <%= f.password_field :password %>
-  </div>
-  <div>
-    <p>タイトル</p>
-    <%= f.text_field :title %>
-  </div>
-  <div>
-    <p>説明</p>
-    <%= f.text_area :explanation %>
-  </div>
-  <div>
-    <p>開始日</p>
-    <%= f.date_field :day_start %>
-  </div>
-  <div>
-    <p>終了日</p>
-    <%= f.date_field :day_end %>
-  </div>
-  <!--
-  <div>
-    <p>はずす日</p>
-    <%= f.text_field :day_out %>
-  </div>
-  -->
-  <div>
-    <p>時間で分けるか</p>
-    <%= f.check_box :enable_time %>
-  </div>
-  <div>
-    <p>開始時間</p>
-    <%= f.time_select :time_start %>
-  </div>
-  <div>
-    <p>終了時間</p>
-    <%= f.time_select :time_end %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-  </div>
-<% end %>
-
 <% if controller.action_name == 'new' %>
 <form action="<%= plans_url %>" method="POST">
 <% else %>
-<form action="<%= plan_url(@plan) %>" method="PUT">
+<form action="<%= plan_url(@plan.original_url) %>" method="PUT">
 <% end %>
   <input name="authenticity_token" type="hidden">
 
@@ -90,5 +44,9 @@
   <input id="enable_time" type="checkbox" name="plan[enable_time]" value="1" style="display: none"></input>
   <label for="enable_time" is="input-checkbox" label="enable time(現状無意味)" style="display: block"></label>
 
-  <button is="submit-button" style="color: #388E3C; padding: none;">Submit</button>
+  <button type="submit" is="submit-button" style="color: #388E3C; padding: none;" label="Submit"></button>
+
+<% end %>
+
+
 </form>

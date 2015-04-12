@@ -1,8 +1,8 @@
-<polymer-element name="submit-button" extends="button">
+<polymer-element name="submit-button" extends="button" attributes="label">
   <template>
     <link rel="stylesheet" href="submit-button.css" />
 
-    <paper-button raised><content></content></paper-button>
+    <paper-button raised>{{label}}</paper-button>
   </template>
 
   <script src="submit-button.js"></script>
