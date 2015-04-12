@@ -4,5 +4,5 @@
 
 <br>
 
-<%= link_to 'Show', @plan, {:class => "button tiny radius"} %> 
-<%= link_to 'Back', plans_path, {:class => "button tiny radius secondary"} %>
+<%= link_to @plan do %><paper-button raised>Show</paper-button><% end %>
+<%= link_to plans_path do %><paper-button style="color: #455A64" raised>Back</paper-button><% end %>
